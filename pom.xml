@@ -49,7 +49,7 @@
     <configuration>
         <archive>
             <manifest>
-                <mainClass>src.main.java.org.example.AdvancedTelegramBot</mainClass>
+                <mainClass>org.example.AdvancedTelegramBot.java</mainClass>
             </manifest>
         </archive>
     </configuration>
