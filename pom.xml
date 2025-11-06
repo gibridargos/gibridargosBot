@@ -41,22 +41,8 @@
 
     <build>
         <plugins>
-            <!-- ✅ UBER/FAT JAR yaratish (serverga qo‘yamiz, bitta jar bo‘ladi) -->
-            <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-jar-plugin</artifactId>
-    <version>3.3.0</version>
-    <configuration>
-        <archive>
-            <manifest>
-                <mainClass>org.example.AdvancedTelegramBot.java</mainClass>
-            </manifest>
-        </archive>
-    </configuration>
-</plugin>
 
-
-            <!-- Compiler plugin -->
+            <!-- Compiler plugin (Java 17) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -65,6 +51,30 @@
                     <release>17</release>
                 </configuration>
             </plugin>
+
+            <!-- Fat JAR (All dependencies inside) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>org.example.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                            <finalName>telegram-bot</finalName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
